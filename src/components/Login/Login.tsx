@@ -1,5 +1,9 @@
+// external components
+import { useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
+
+//assets
 import LendsqrLogo from '../../assets/illustrations/LendsqrLogo.svg'
 import LendsqrLoginImage from '../../assets/illustrations/LendsqrLoginImage.webp'
 import './Login.scss'
@@ -10,14 +14,9 @@ const schema = Yup.object({
 })
 
 export default function LoginComponent() {
-  const handleSubmit = async (values: { email: string; password: string }) => {
-    // const res = await fetch('/api/login', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(values),
-    // })
-    // const data = await res.json()
-    // console.log(data)
+  const [showPassword, setShowPassword] = useState(false)
+
+  const handleSubmit = (values: { email: string; password: string }) => {
     console.log(values, 'values')
   }
 
@@ -42,12 +41,22 @@ export default function LoginComponent() {
           <Form className="form">
             <div className="input-group">
               <Field type="email" name="email" placeholder="Email" />
-              <ErrorMessage name="email" component="small" className="error" className='error' />
+              <ErrorMessage name="email" component="small" className="error" />
             </div>
 
-            <div className="input-group">
-              <Field type="password" name="password" placeholder="Password" />
-              <ErrorMessage name="password" component="small" className="error" className='error' />
+            <div className="input-group password-group">
+              <Field
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                placeholder="Password"
+              />
+              <span
+                className="toggle"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? 'HIDE' : 'SHOW'}
+              </span>
+              <ErrorMessage name="password" component="small" className="error" />
             </div>
 
             <p>Forgot PASSWORD?</p>

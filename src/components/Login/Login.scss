@@ -99,6 +99,25 @@
     }
 }
 
+.password-group {
+  position: relative;
+
+  input {
+    padding-right: 60px;
+  }
+
+  .toggle {
+    position: absolute;
+    right: 16px;
+    top: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #39cdcc;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+}
+
 form {
     display: flex;
     flex-direction: column;
