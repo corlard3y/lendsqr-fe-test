@@ -1,0 +1,18 @@
+@use '../../styles/mixins' as *;
+
+.login-wrapper {
+    @include flex-row-center;
+    @include h-w-screen;
+}
+
+.image-wrapper {
+    @include h-w-full;
+    background-color: #eee;
+}
+
+.form-wrapper {
+    @include h-w-full;
+    /* background-color: red; */
+    /* width: 100vw; */
+    /* height: 100vh; */
+}
