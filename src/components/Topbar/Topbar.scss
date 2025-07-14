@@ -1,0 +1,97 @@
+@use '../../styles/mixins' as *;
+@use '../../styles/media' as *;
+
+.topbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    font-family: "Avenir Next";
+    padding: 0 60px 0 30px;
+    box-sizing: border-box;
+
+    @include respond(tablet) {
+        padding: 0 20px 0 10px;
+    }
+
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  height: 40px;
+
+  @include respond(tablet) {
+      display: none;
+  }
+
+
+  input {
+    flex: 1;
+    padding: 0 12px;
+    font-size: 14px;
+    outline: none;
+    color: #545F7D;
+    border: none;
+    border: 1px solid #eee;
+    height: 100%;
+    background: #fff;
+    box-sizing: border-box;
+    border-radius: 8px 0px 0px 8px;
+
+
+    &::placeholder {
+      color: #aaa;
+    }
+  }
+
+  button {
+    border: 1px solid #39cdcc;
+    padding: 0 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #39cdcc;
+    width: 56px;
+    height: 100%;
+    border-radius: 0px 8px 8px 0px;
+
+    svg {
+      color: #fff;
+    }
+
+    &:hover svg {
+      color: #000;
+    }
+  }
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+
+  @include respond(tablet) {
+      gap: 14px;
+  }
+
+  a, .bell-icon {
+      @include respond(tablet) {
+          display: none;
+      }
+  }
+
+  a, .bell-icon, div {
+      color: #213F7D;
+  }
+}
+
+.user-name {
+    @include flex-row-center;
+    gap: 8px;
+}

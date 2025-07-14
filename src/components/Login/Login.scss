@@ -6,9 +6,6 @@
     @include h-w-screen;
     font-family: "Avenir Next";
 
-    @include respond(tablet) {
-
-    }
 }
 
 .image-wrapper {
