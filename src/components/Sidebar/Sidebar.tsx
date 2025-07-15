@@ -1,7 +1,9 @@
 // external components
 import { NavLink } from 'react-router-dom'
+import { FaChevronDown } from "react-icons/fa";
 
 // internal components
+import { BriefcaseIcon, SignoutIcon } from '../../assets/icons';
 import { sidebarItems } from '../../constants/sidebar';
 import './Sidebar.scss'
 
@@ -11,6 +13,13 @@ export const Sidebar = () => {
 
   return (
     <div className="sidebar">
+      <NavLink to={'/'} className="outer-link">
+         <img src={BriefcaseIcon} alt={'Log out'} className='icon' />
+        <span>Switch Organization</span>
+        <FaChevronDown className='chevron-icon' />
+      </NavLink>
+
+
       {sidebarItems.map((item, idx) => (
         <div key={idx} className="sidebar-section">
           {item.icon && item.path ? (
@@ -30,6 +39,13 @@ export const Sidebar = () => {
           ))}
         </div>
       ))}
+
+      <NavLink to={'/'} className="outer-link">
+         <img src={SignoutIcon} alt={'Log out'} className='icon' />
+        <span>Logout</span>
+      </NavLink>
+
+      <div className='version-number'>v1.2.0</div>
     </div>
   )
 }

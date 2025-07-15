@@ -11,6 +11,7 @@ import PaperIcon from './PaperIcon.svg'
 import PhoneIcon from './PhoneIcon.svg'
 import PiggyBankIcon from './PiggyBankIcon.svg'
 import SackIcon from './SackIcon.svg'
+import SignoutIcon from './SignoutIcon.svg'
 import SlidersIcon from './SlidersIcon.svg'
 import SolidCoinIcon from './SolidCoinIcon.svg'
 import TireIcon from './TireIcon.svg'
@@ -34,6 +35,7 @@ export {
   PhoneIcon,
   PiggyBankIcon,
   SackIcon,
+  SignoutIcon,
   SlidersIcon,
   SolidCoinIcon,
   TireIcon,
