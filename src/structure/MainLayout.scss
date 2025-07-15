@@ -5,3 +5,16 @@
     background: #FFF;
     box-shadow: 3px 0px 20px 0px rgba(0, 0, 0, 0.04);
 }
+
+.body-layout {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+aside {
+    width: 290px;
+    height: calc(100vh - 100px);
+    background: #FFF;
+    box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.04);
+}

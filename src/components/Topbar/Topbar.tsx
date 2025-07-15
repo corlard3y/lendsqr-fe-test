@@ -1,8 +1,9 @@
+// external components
 import { FiSearch } from 'react-icons/fi';
 import { BsBell, BsFillCaretDownFill } from "react-icons/bs";
 
+// internal components
 import LendsqrLogo from '../../assets/illustrations/LendsqrLogo.svg'
-
 import './Topbar.scss';
 
 
