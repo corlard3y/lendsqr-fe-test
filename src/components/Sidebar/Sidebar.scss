@@ -5,12 +5,19 @@
   @include h-w-full;
   @include font-work-sans;
   background-color: #fff;
-  /* padding: 0 0 0 30px; */
+  overflow-y: auto;
 }
 
-.sidebar-section{
-    height: 40px;
+/* .sidebar::-webkit-scrollbar {
+  width: 4px;
+  height: 50px;
 }
+
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: rgba(57, 205, 204, 0.8);
+  border-radius: 4px;
+} */
+
 
 .sidebar-heading {
   color: #545F7D;

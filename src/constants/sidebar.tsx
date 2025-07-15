@@ -1,10 +1,22 @@
 import {
+  BadgeIcon,
+  BankIcon,
+  BriefcaseIcon,
+  ChartbarIcon,
+  ClipboardIcon,
   DashboardIcon,
+  GalaxyIcon,
   HandHoldingIcon,
   HandshakeIcon,
+  PaperIcon,
+  PhoneIcon,
   PiggyBankIcon,
   SackIcon,
+  SlidersIcon,
+  SolidCoinIcon,
+  TireIcon,
   UserCheckIcon,
+  UserCOGIcon,
   UserTimesIcon,
   UsersFriendsIcon,
   UsersIcon
@@ -62,4 +74,79 @@ export const sidebarItems = [
       },
     ],
   },
+  {
+    title: 'Businesses',
+    children: [
+      {
+        title: 'Organization',
+        path: '/#',
+        icon: BriefcaseIcon,
+      },
+      {
+        title: 'Loan Products',
+        path: '/#',
+        icon: HandHoldingIcon,
+      },
+      {
+        title: 'Savings Products',
+        path: '/#',
+        icon: BankIcon,
+      },
+      {
+        title: 'Fees and Charges',
+        path: '/#',
+        icon: SolidCoinIcon,
+      },
+      {
+        title: 'Transactions',
+        path: '/#',
+        icon: PhoneIcon,
+      },
+      {
+        title: 'Services',
+        path: '/#',
+        icon: GalaxyIcon,
+      },
+      {
+        title: 'Service Account',
+        path: '/#',
+        icon: UserCOGIcon,
+      },
+      {
+        title: 'Settlements',
+        path: '/#',
+        icon: PaperIcon,
+      },
+      {
+        title: 'Reports',
+        path: '/#',
+        icon: ChartbarIcon,
+      },
+    ],
+  },
+  {
+    title: 'Businesses',
+    children: [
+      {
+        title: 'Organization',
+        path: '/#',
+        icon: SlidersIcon,
+      },
+      {
+        title: 'Fees and Pricing',
+        path: '/#',
+        icon: BadgeIcon,
+      },
+      {
+        title: 'Audit Logs',
+        path: '/#',
+        icon: ClipboardIcon,
+      },
+      {
+        title: 'Systems Messages',
+        path: '/#',
+        icon: TireIcon,
+      },
+    ]
+  }
 ]
