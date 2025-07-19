@@ -1,4 +1,4 @@
-
+@use '../styles/media' as *;
 
 .topbar-section {
     height: 100px;
@@ -13,8 +13,37 @@
 }
 
 aside {
+  width: 290px;
+  height: calc(100vh - 100px);
+  background: #FFF;
+  box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.04);
+  transition: transform 0.3s ease-in-out;
+
+  // hidden on mobile
+  transform: translateX(-100%);
+  position: fixed;
+  top: 100px;
+  left: 0;
+  z-index: 999;
+
+  &.show {
+    transform: translateX(0);
+  }
+
+  @include respond(tablet) {
+    position: fixed;
+    transform: translateX(-100%);
+  }
+
+  @media (min-width: 769px) {
+    position: static;
+    transform: none;
+  }
+}
+
+/* aside {
     width: 290px;
     height: calc(100vh - 100px);
     background: #FFF;
     box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.04);
-}
+} */

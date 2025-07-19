@@ -70,11 +70,26 @@
   }
 }
 
+
+
 .user-info {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 24px;
+
+  .bars-icon {
+      display: none;
+  }
+
+  @include respond(tablet) {
+      .bars-icon {
+          display: block;
+          color: #213F7D;
+      }
+  }
+
+
 
   @include respond(tablet) {
       gap: 14px;
