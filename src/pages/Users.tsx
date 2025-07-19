@@ -1,7 +1,7 @@
-export default function Dashboard() {
+import UsersComponent from "../components/Users/Users";
+
+export default function Users() {
   return (
-    <div>
-      Users
-    </div>
+      <UsersComponent />
   )
 }

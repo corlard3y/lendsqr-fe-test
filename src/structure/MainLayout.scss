@@ -1,4 +1,5 @@
 @use '../styles/media' as *;
+@use '../styles/mixins' as *;
 
 .topbar-section {
     height: 100px;
@@ -13,7 +14,7 @@
 }
 
 aside {
-  width: 290px;
+  width: 340px;
   height: calc(100vh - 100px);
   background: #FFF;
   box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.04);
@@ -41,9 +42,13 @@ aside {
   }
 }
 
-/* aside {
-    width: 290px;
-    height: calc(100vh - 100px);
-    background: #FFF;
-    box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.04);
-} */
+main {
+    background: #fbfbfb;
+    width: 100%;
+    padding: 60px;
+    box-sizing: border-box;
+
+    @include respond(tablet) {
+        padding: 24px;
+    }
+}

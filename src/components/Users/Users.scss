@@ -1,0 +1,59 @@
+@use '../../styles/media' as *;
+@use '../../styles/mixins' as *;
+
+
+h2 {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    @include font-work-sans;
+    color: #213F7D;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    margin-top: 16px;
+    @include font-work-sans;
+
+    @include respond(tablet) {
+        flex-direction: column;
+        gap: 24px;
+    }
+}
+
+.stat {
+    background: #fff;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 24px;
+    box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    min-height: 160px;
+    max-height: 160px;
+
+
+    h4 {
+     color: #545F7D;
+     font-size: 0.875rem;
+     font-weight: 500;
+     line-height: 100%;
+     text-transform: uppercase;
+     margin: 0;
+    }
+
+    p {
+        font-size: 1.5rem;
+        font-weight: 500;
+        line-height: 100%;
+        color: #213F7D;
+        margin: 0;
+
+    }
+}
