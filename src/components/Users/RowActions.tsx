@@ -1,14 +1,36 @@
-import { useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import './Users.scss';
 import { EyeIcon, UserCancelIcon, UserMarkIcon } from '../../assets/icons';
 
-export const RowActions = () => {
-  const [open, setOpen] = useState(false);
+type RowActionsProps = {
+  open: boolean;
+  onToggle: () => void;
+  onClose: () => void;
+};
+
+export const RowActions = ({ open, onToggle, onClose }: RowActionsProps) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        onClose();
+      }
+    };
+
+    if (open) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [open, onClose]);
 
   return (
-    <div className="row-actions">
-      <BsThreeDotsVertical className="dots" onClick={() => setOpen(prev => !prev)} />
+    <div className="row-actions" ref={ref}>
+      <BsThreeDotsVertical className="dots" onClick={onToggle} />
 
       {open && (
         <ul className="dropdown">

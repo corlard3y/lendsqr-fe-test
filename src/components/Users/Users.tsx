@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import { useState, type FC } from "react";
 import './Users.scss';
 import { UsersStats } from "./UsersStats";
 import { FilterablePaginatedTable } from "../../shared/Table";
@@ -101,24 +101,33 @@ type User = {
 };
 
 const UsersComponent: FC<UsersProps> = () => {
+  const [openActionIndex, setOpenActionIndex] = useState<number | null>(null);
 
-  const columns: ColumnDef<User>[] = [
-    { accessorKey: 'organization', header: 'Organization' },
-    { accessorKey: 'username', header: 'Username' },
-    { accessorKey: 'email', header: 'Email' },
-    { accessorKey: 'phone', header: 'Phone Number' },
-    { accessorKey: 'date_joined', header: 'Date Joined' },
-    {
-      accessorKey: 'status',
-      header: 'Status',
-      cell: ({ getValue }) => <StatusTag status={getValue() as string} />
-    },
-    {
-      id: 'actions',
-      header: '',
-      cell: () => <RowActions />
-    }
-  ];
+    const columns: ColumnDef<User>[] = [
+      { accessorKey: 'organization', header: 'Organization' },
+      { accessorKey: 'username', header: 'Username' },
+      { accessorKey: 'email', header: 'Email' },
+      { accessorKey: 'phone', header: 'Phone Number' },
+      { accessorKey: 'date_joined', header: 'Date Joined' },
+      {
+        accessorKey: 'status',
+        header: 'Status',
+        cell: ({ getValue }) => <StatusTag status={getValue() as string} />
+      },
+      {
+        id: 'actions',
+        header: '',
+        cell: ({ row }) => (
+          <RowActions
+            open={openActionIndex === row.index}
+            onClose={() => setOpenActionIndex(null)}
+            onToggle={() =>
+              setOpenActionIndex(prev => (prev === row.index ? null : row.index))
+            }
+          />
+        )
+      }
+    ];
   return (
     <div className="user">
 

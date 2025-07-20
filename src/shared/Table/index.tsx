@@ -52,11 +52,15 @@ export const FilterablePaginatedTable = <T extends object>({ data , columns }: T
     <div className="table-wrapper">
       {showFilters && (
         <FilterForm
-        filters={filters}
-        setFilters={setFilters}
-        columns={columns.map(col => col?.accessorKey as string).filter(Boolean)}
-      />
-     )}
+          filters={filters}
+          setFilters={setFilters}
+          columns={
+            columns
+              .filter((col): col is { accessorKey: string } => 'accessorKey' in col && typeof col.accessorKey === 'string')
+              .map(col => col.accessorKey)
+          }
+        />
+      )}
 
       <table className="styled-table">
         <thead>
