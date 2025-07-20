@@ -16,6 +16,13 @@
   align-items: center;
 }
 
+@mixin flex-column($align: flex-start, $gap: 0) {
+  display: flex;
+  flex-direction: column;
+  align-items: $align;
+  gap: $gap;
+}
+
 @mixin flex-column-center {
   display: flex;
   flex-direction: column;
@@ -27,4 +34,25 @@
   font-family: "Work Sans", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
+}
+
+@mixin action-button($border-color, $text-color) {
+  border-radius: 8px;
+  border: 1px solid $border-color;
+  background: transparent;
+  height: fit-content;
+  padding: 12px;
+  color: $text-color;
+  text-align: center;
+  font-size: 0.87rem;
+  font-weight: 600;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+@mixin text-style($size, $weight, $color) {
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+  line-height: normal;
 }

@@ -89,8 +89,6 @@ const userData = [
   }
 ];
 
-type UsersProps = {};
-
 type User = {
   organization: string;
   username: string;
@@ -100,7 +98,7 @@ type User = {
   status: string;
 };
 
-const UsersComponent: FC<UsersProps> = () => {
+const UsersComponent: FC = () => {
   const [openActionIndex, setOpenActionIndex] = useState<number | null>(null);
 
     const columns: ColumnDef<User>[] = [
