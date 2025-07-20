@@ -4,6 +4,7 @@ import BriefcaseIcon from './BriefcaseIcon.svg'
 import ChartbarIcon from './ChartbarIcon.svg'
 import ClipboardIcon from './ClipboardIcon.svg'
 import DashboardIcon from './DashboardIcon.svg'
+import FilterIcon from './FilterIcon.svg'
 import GalaxyIcon from './GalaxyIcon.svg'
 import HandHoldingIcon from './HandHoldingIcon.svg'
 import HandshakeIcon from './HandshakeIcon.svg'
@@ -28,6 +29,7 @@ export {
   ChartbarIcon,
   ClipboardIcon,
   DashboardIcon,
+  FilterIcon,
   GalaxyIcon,
   HandHoldingIcon,
   HandshakeIcon,
