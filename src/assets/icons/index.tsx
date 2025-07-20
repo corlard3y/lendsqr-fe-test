@@ -4,6 +4,7 @@ import BriefcaseIcon from './BriefcaseIcon.svg'
 import ChartbarIcon from './ChartbarIcon.svg'
 import ClipboardIcon from './ClipboardIcon.svg'
 import DashboardIcon from './DashboardIcon.svg'
+import EyeIcon from './EyeIcon.svg'
 import FilterIcon from './FilterIcon.svg'
 import GalaxyIcon from './GalaxyIcon.svg'
 import HandHoldingIcon from './HandHoldingIcon.svg'
@@ -16,8 +17,10 @@ import SignoutIcon from './SignoutIcon.svg'
 import SlidersIcon from './SlidersIcon.svg'
 import SolidCoinIcon from './SolidCoinIcon.svg'
 import TireIcon from './TireIcon.svg'
+import UserCancelIcon from './UserCancelIcon.svg'
 import UserCheckIcon from './UserCheckIcon.svg'
 import UserCOGIcon from './UserCOGIcon.svg'
+import UserMarkIcon from './UserMarkIcon.svg'
 import UserTimesIcon from './UserTimesIcon.svg'
 import UsersFriendsIcon from './UsersFriendsIcon.svg'
 import UsersIcon from './UsersIcon.svg'
@@ -29,6 +32,7 @@ export {
   ChartbarIcon,
   ClipboardIcon,
   DashboardIcon,
+  EyeIcon,
   FilterIcon,
   GalaxyIcon,
   HandHoldingIcon,
@@ -41,8 +45,10 @@ export {
   SlidersIcon,
   SolidCoinIcon,
   TireIcon,
+  UserCancelIcon,
   UserCheckIcon,
   UserCOGIcon,
+  UserMarkIcon,
   UserTimesIcon,
   UsersFriendsIcon,
   UsersIcon,

@@ -2,6 +2,9 @@ import type { FC } from "react";
 import './Users.scss';
 import { UsersStats } from "./UsersStats";
 import { FilterablePaginatedTable } from "../../shared/Table";
+import type { ColumnDef } from "@tanstack/react-table";
+import { StatusTag } from "./StatusTag";
+import { RowActions } from "./RowActions";
 
 const userData = [
   {
@@ -86,9 +89,36 @@ const userData = [
   }
 ];
 
-export type UsersProps = {};
+type UsersProps = {};
+
+type User = {
+  organization: string;
+  username: string;
+  email: string;
+  phone: string;
+  date_joined: string;
+  status: string;
+};
 
 const UsersComponent: FC<UsersProps> = () => {
+
+  const columns: ColumnDef<User>[] = [
+    { accessorKey: 'organization', header: 'Organization' },
+    { accessorKey: 'username', header: 'Username' },
+    { accessorKey: 'email', header: 'Email' },
+    { accessorKey: 'phone', header: 'Phone Number' },
+    { accessorKey: 'date_joined', header: 'Date Joined' },
+    {
+      accessorKey: 'status',
+      header: 'Status',
+      cell: ({ getValue }) => <StatusTag status={getValue() as string} />
+    },
+    {
+      id: 'actions',
+      header: '',
+      cell: () => <RowActions />
+    }
+  ];
   return (
     <div className="user">
 
@@ -99,7 +129,7 @@ const UsersComponent: FC<UsersProps> = () => {
       </div>
 
       <div className="table-section">
-        <FilterablePaginatedTable data={userData} />
+        <FilterablePaginatedTable data={userData} columns={columns} />
       </div>
     </div>
   );

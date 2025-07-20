@@ -11,6 +11,7 @@
     box-shadow: 3px 5px 20px 0px rgba(0, 0, 0, 0.04);
     padding: 24px;
     position: relative;
+    overflow: visible;
 }
 
 .styled-table {
@@ -147,8 +148,11 @@
   line-height: normal;
   color: rgba(84, 95, 125, 0.7);
 
-  ::placeholder {
-      color: rgba(84, 95, 125, 0.7);
+  &::placeholder {
+    color: rgba(33, 63, 125, 0.4);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
   }
 }
 

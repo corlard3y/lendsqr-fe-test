@@ -13,14 +13,11 @@ import { FilterIcon } from '../../assets/icons';
 
 interface TableProps<T extends object> {
   data: T[];
+  columns: ColumnDef<T>[];
 }
 
-export const FilterablePaginatedTable = <T extends object>({ data }: TableProps<T>) => {
-  const columns = Object.keys(data[0] || {}).map(key => ({
-    accessorKey: key,
-    header: key,
-    cell: (info: any) => info.getValue(),
-  })) as ColumnDef<T>[];
+export const FilterablePaginatedTable = <T extends object>({ data , columns }: TableProps<T>) => {
+
 
   const [filters, setFilters] = useState<Record<string, string>>({});
   const [showFilters, setShowFilters] = useState(false);
@@ -53,13 +50,13 @@ export const FilterablePaginatedTable = <T extends object>({ data }: TableProps<
   return (
     <div>
     <div className="table-wrapper">
-      {/* {showFilters && ( */}
+      {showFilters && (
         <FilterForm
         filters={filters}
         setFilters={setFilters}
-        columns={Object.keys(data[0] || {})}
+        columns={columns.map(col => col?.accessorKey as string).filter(Boolean)}
       />
-      {/* )} */}
+     )}
 
       <table className="styled-table">
         <thead>
@@ -70,9 +67,9 @@ export const FilterablePaginatedTable = <T extends object>({ data }: TableProps<
                   {header.isPlaceholder ? null : (
                     <div className="th-content">
                       {flexRender(header.column.columnDef.header, header.getContext())}
-                      <img src={FilterIcon} alt="Filter" className="filter-icon" onClick={() => {
+                      {(header.column.columnDef.header && <img src={FilterIcon} alt="Filter" className="filter-icon" onClick={() => {
                         setShowFilters(!showFilters)
-                      }} />
+                      }} />)}
                     </div>
                   )}
                 </th>
