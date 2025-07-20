@@ -1,9 +1,24 @@
 import { Link } from 'react-router-dom'
-import './UserDetails.scss'
-import { ArrowLeftIcon } from '../../assets/icons'
 import { FaRegStar, FaStar } from 'react-icons/fa'
 
+import { ArrowLeftIcon } from '../../assets/icons'
+import { Tabs } from '../../shared/Tabs';
+
+import './UserDetails.scss'
+import { useState } from 'react';
+import GeneralDetails from './GeneralDetails';
+
 export default function UserDetailsComponents() {
+  const [activeTab, setActiveTab] = useState('general');
+
+  const tabData = [
+    { id: 'general', label: 'General Details', content: <GeneralDetails /> },
+    { id: 'documents', label: 'Documents', content: <div>Documents Content</div> },
+    { id: 'bank', label: 'Bank Details', content: <div>Bank Details Content</div> },
+  ];
+
+  const currentContent = tabData.find(tab => tab.id === activeTab)?.content;
+
   return (
       <div>
         <Link to="/users" className='back-link'><img src={ArrowLeftIcon} alt="Back" />Back to Users</Link>
@@ -49,8 +64,16 @@ export default function UserDetailsComponents() {
           </div>
         </div>
 
-        <div>tabs</div>
+        <div className='tab-panel'>
+          <Tabs
+            tabs={tabData}
+            activeTab={activeTab}
+            onChange={setActiveTab}
+          />
         </div>
+        </div>
+
+      <div className='tab-content'>{ currentContent }</div>
 
       </div>
   )

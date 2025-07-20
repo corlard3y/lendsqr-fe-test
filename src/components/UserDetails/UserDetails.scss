@@ -163,4 +163,67 @@ div {
             }
         }
     }
+
+    .tab-panel {
+        margin-top: 50px;
+    }
+}
+
+.tab-content {
+    border-radius: 4px;
+    border: 1px solid rgba(33, 63, 125, 0.06);
+    background: #FFF;
+    box-shadow: 3px 5px 20px 0px rgba(0, 0, 0, 0.04);
+    margin-top: 20px;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.general-details {
+  display: flex;
+  flex-direction: column;
+
+  .section {
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(33, 63, 125, 0.1);
+
+    &.last {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    h3 {
+      @include text-style(1rem, 500, #213F7D);
+      margin: 0 0 30px 0;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 24px;
+
+      @include respond(tablet) {
+        grid-template-columns: 1fr;
+      }
+
+      .info-box {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .label {
+          @include text-style(0.75rem, 400, #545f7d);
+          text-transform: uppercase;
+          margin: 0;
+        }
+
+        .value {
+          @include text-style(0.875rem, 500, #213f7d);
+          margin: 0;
+        }
+      }
+    }
+  }
 }
