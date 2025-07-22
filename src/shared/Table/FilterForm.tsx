@@ -1,4 +1,5 @@
 import { useState } from "react";
+import './Table.scss';
 
 interface FilterFormProps {
   filters: Record<string, string>;

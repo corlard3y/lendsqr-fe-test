@@ -78,6 +78,7 @@ export const FilterablePaginatedTable = <T extends object>({
   return (
     <div>
       <div className="table-wrapper">
+
         {showFilterForm && (
           <div ref={filterRef}>
             <FilterForm
@@ -85,7 +86,7 @@ export const FilterablePaginatedTable = <T extends object>({
               setFilters={setFilters}
               columns={filterableKeys}
             />
-          </div>
+           </div>
         )}
 
         <table className="styled-table">

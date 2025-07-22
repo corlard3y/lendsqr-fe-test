@@ -138,8 +138,6 @@
     }
   }
 }
-
-/* Filters.scss */
 .filters-form {
   display: flex;
   flex-direction: column;
@@ -151,7 +149,6 @@
   box-shadow: 3px 5px 20px 0px rgba(0, 0, 0, 0.04);
   width: 270px;
   position: absolute;
-  top: 0;
   @include font-work-sans;
 
 }
@@ -165,6 +162,7 @@
   font-weight: 500;
   line-height: normal;
   text-transform: capitalize;
+  margin-bottom: 8px;
 }
 
 .filters-form input,
@@ -201,20 +199,23 @@
 .filters-form .reset {
   background: white;
   color: #545f7d;
-  padding: 8px 16px;
+  padding: 16px 16px;
   border-radius: 8px;
   border: 1px solid #545F7D;
   text-transform: capitalize;
   letter-spacing: 0px;
+  width: 100%;
 }
 
 .filters-form .filter {
   background: #39cdcc;
   border-radius: 8px;
   border: 1px solid #39CDCC;
+  font-weight: 600;
   color: white;
-  padding: 8px 16px;
+  padding: 16px 16px;
   border-radius: 6px;
   text-transform: capitalize;
   letter-spacing: 0px;
+  width: 100%;
 }
