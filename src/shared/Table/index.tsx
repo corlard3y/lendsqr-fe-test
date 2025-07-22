@@ -5,16 +5,52 @@ import {
   flexRender,
   type ColumnDef,
 } from '@tanstack/react-table';
+import { useMemo, useState, useRef, useEffect } from 'react';
 import './Table.scss';
+import { FilterForm } from './FilterForm';
+import { FilterIcon } from '../../assets/icons';
 
 interface TableProps<T extends object> {
   data: T[];
   columns: ColumnDef<T>[];
+  filterableKeys?: string[];
 }
 
-export const FilterablePaginatedTable = <T extends object>({ data, columns }: TableProps<T>) => {
+export const FilterablePaginatedTable = <T extends object>({
+  data,
+  columns,
+  filterableKeys = [],
+}: TableProps<T>) => {
+  const [filters, setFilters] = useState<Record<string, string>>({});
+  const [showFilterForm, setShowFilterForm] = useState(false);
+  const filterRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (filterRef.current && !filterRef.current.contains(e.target as Node)) {
+        setShowFilterForm(false);
+      }
+    };
+
+    if (showFilterForm) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showFilterForm]);
+
+  const filteredData = useMemo(() => {
+    return data.filter((row) =>
+      Object.entries(filters).every(([key, value]) =>
+        String((row as any)[key] ?? '').toLowerCase().includes(value.toLowerCase())
+      )
+    );
+  }, [data, filters]);
+
   const table = useReactTable({
-    data,
+    data: filteredData,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -29,13 +65,34 @@ export const FilterablePaginatedTable = <T extends object>({ data, columns }: Ta
   return (
     <div>
       <div className="table-wrapper">
+        {showFilterForm && (
+          <div ref={filterRef}>
+            <FilterForm
+              filters={filters}
+              setFilters={setFilters}
+              columns={filterableKeys}
+            />
+          </div>
+        )}
+
         <table className="styled-table">
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
                   <th key={header.id}>
-                    {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                    {header.isPlaceholder ? null : (
+                      <div className="th-content">
+                        {flexRender(header.column.columnDef.header, header.getContext())}
+                        {header.column.columnDef.header && (
+                          <img
+                            src={FilterIcon}
+                            onClick={() => setShowFilterForm((prev) => !prev)}
+                            className="filter-icon"
+                          />
+                        )}
+                      </div>
+                    )}
                   </th>
                 ))}
               </tr>
@@ -45,29 +102,24 @@ export const FilterablePaginatedTable = <T extends object>({ data, columns }: Ta
             {table.getRowModel().rows.map((row) => (
               <tr key={row.id}>
                 {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
+                  <td key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
                 ))}
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
       <div className="pagination">
-        <button
-          onClick={() => {
-            table.previousPage();
-          }}
-          disabled={!table.getCanPreviousPage()}
-        >
+        <button onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
           Previous
         </button>
-        <span>Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}</span>
-        <button
-          onClick={() => {
-            table.nextPage();
-          }}
-          disabled={!table.getCanNextPage()}
-        >
+        <span>
+          Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
+        </span>
+        <button onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
           Next
         </button>
       </div>
