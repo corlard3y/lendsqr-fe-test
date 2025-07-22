@@ -15,7 +15,6 @@ const mockUsers = [
   },
 ];
 
-// Mock the entire hook with simplified return values
 jest.mock("../../queries/hooks/getUsers", () => ({
   GetUsers: jest.fn(),
 }));
@@ -23,17 +22,11 @@ jest.mock("../../queries/hooks/getUsers", () => ({
 describe("Users component", () => {
   const mockGetUsers = getUsersHook.GetUsers as jest.MockedFunction<typeof getUsersHook.GetUsers>;
 
-  afterEach(() => {
-    jest.resetAllMocks();
-  });
-
-  it("renders users table (positive scenario)", () => {
+  it("renders users table with data", () => {
     mockGetUsers.mockReturnValue({
       data: mockUsers,
       isLoading: false,
       isError: false,
-      error: null,
-      refetch: jest.fn(),
     } as any);
     
     render(<Users />);
@@ -42,13 +35,11 @@ describe("Users component", () => {
     expect(screen.getByText(/test@example.com/i)).toBeInTheDocument();
   });
 
-  it("shows error message on fetch failure (negative scenario)", () => {
+  it("shows error message when fetch fails", () => {
     mockGetUsers.mockReturnValue({
       data: undefined,
       isLoading: false,
       isError: true,
-      error: new Error("Failed to fetch"),
-      refetch: jest.fn(),
     } as any);
     
     render(<Users />);
