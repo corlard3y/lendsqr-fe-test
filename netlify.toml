@@ -1,0 +1,12 @@
+[build]
+  command = "yarn build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "18"
+  YARN_VERSION = "4.2.2"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
