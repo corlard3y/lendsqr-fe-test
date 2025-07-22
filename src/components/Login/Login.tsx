@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
+import { useNavigate } from 'react-router-dom'
 
 //assets
 import LendsqrLogo from '../../assets/illustrations/LendsqrLogo.svg'
@@ -14,10 +15,17 @@ const schema = Yup.object({
 })
 
 export default function LoginComponent() {
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (values: { email: string; password: string }) => {
-    console.log(values, 'values')
+    // any random email and password works since this is a test env
+    if (values.email != '' && values.password != '') {
+      sessionStorage.setItem('isAuthenticated', 'true');
+      navigate('/dashboard');
+    } else {
+      // do nothing
+    }
   }
 
   return (

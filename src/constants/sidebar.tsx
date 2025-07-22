@@ -34,7 +34,7 @@ export const sidebarItems = [
     children: [
       {
         title: 'Users',
-        path: '/#',
+        path: '/users',
         icon: UsersFriendsIcon,
       },
       {
@@ -125,7 +125,7 @@ export const sidebarItems = [
     ],
   },
   {
-    title: 'Businesses',
+    title: 'Settings',
     children: [
       {
         title: 'Organization',
