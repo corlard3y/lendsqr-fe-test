@@ -1,8 +1,8 @@
 import { useState, type FC } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Topbar } from '../components/Topbar/Topbar';
-import { Sidebar } from '../components/Sidebar/Sidebar';
 import './MainLayout.scss';
+import { Topbar } from './Topbar/Topbar';
+import { Sidebar } from './Sidebar/Sidebar';
 
 const MainLayout: FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
