@@ -1,13 +1,12 @@
 import { Link, useParams } from 'react-router-dom'
 import { FaRegStar, FaStar } from 'react-icons/fa'
+import { useEffect, useState } from 'react'
 
 import { ArrowLeftIcon } from '../../assets/icons'
 import { Tabs } from '../../shared/Tabs';
 import { GetUsers } from '../../queries';
 
-
 import './UserDetails.scss'
-import { useState } from 'react';
 import GeneralDetails from './GeneralDetails';
 import type { UserDetails } from '../../types/users';
 import { formatCurrency } from '../../utils/formatCurrency';
@@ -18,48 +17,53 @@ export default function UserDetailsComponents() {
   const numericId = Number(id);
 
   const { data: users, isLoading, isError } = GetUsers();
-  const currentUser = (users as UserDetails[])?.find(
-    (user: UserDetails) => user.id === numericId
-  );
 
-  if (isLoading) return <p>Loading users...</p>;
-  if (isError || !users) return <p>Error loading users.</p>;
+  // get from localStorage if it already exists otherwise, store user details in localStorage
+  const stored = localStorage.getItem('selectedUser');
+  const parsedStored = stored ? (JSON.parse(stored) as UserDetails) : null;
+
+  const currentUser =
+    (parsedStored?.id === numericId ? parsedStored : null) ||
+    (users as UserDetails[])?.find((user) => user.id === numericId);
+
+  useEffect(() => {
+    if (currentUser) {
+      localStorage.setItem('selectedUser', JSON.stringify(currentUser));
+    }
+  }, [currentUser]);
+
+  if (isLoading && !currentUser) return <p>Loading users...</p>;
+  if (isError && !currentUser) return <p>Error loading users.</p>;
 
   const tabData = [
-    { id: 'general', label: 'General Details', content: <GeneralDetails currentUser={currentUser} /> },
+    { id: 'general', label: 'General Details', content: <GeneralDetails currentUser={currentUser!} /> },
     { id: 'documents', label: 'Documents', content: <div>Documents Content</div> },
     { id: 'bank', label: 'Bank Details', content: <div>Bank Details Content</div> },
   ];
 
   const currentContent = tabData.find(tab => tab.id === activeTab)?.content;
 
-
-
-
   return (
-      <div>
-        <Link to="/users" className='back-link'><img src={ArrowLeftIcon} alt="Back" />Back to Users</Link>
+    <div>
+      <Link to="/users" className='back-link'>
+        <img src={ArrowLeftIcon} alt="Back" />Back to Users
+      </Link>
 
-        <div className='title-details'>
-          <h2>Users Details</h2>
+      <div className='title-details'>
+        <h2>Users Details</h2>
 
-          <button className='blacklist'>
-            Blacklist User
-          </button>
+        <button className='blacklist'>Blacklist User</button>
+        <button className='activate'>Activate User</button>
+      </div>
 
-          <button className='activate'>
-            Activate User
-          </button>
-        </div>
-
-        <div className='user-details-tab'>
+      <div className='user-details-tab'>
         <div className="user-details-section">
           <div className='avatar-section'>
-            <div style={{width: '100px', height: '100px', borderRadius:'100%', background:'blue'}}></div>
+            <div style={{ width: '100px', height: '100px', borderRadius: '100%', background: 'blue' }}></div>
 
             <div className='avi-details'>
-              <div className='name'>{ currentUser?.fullName}</div>
-              <div className='id'>{ currentUser?.id }</div>
+              <div className='name'>{currentUser?.fullName}</div>
+              <div className='id'>{currentUser?.id}</div>
             </div>
           </div>
 
@@ -78,7 +82,7 @@ export default function UserDetailsComponents() {
 
           <div className='user-balance'>
             <div className="balance-title">{formatCurrency(currentUser?.accountBalance || '₦0')}</div>
-            <div className='user-account'>{currentUser?.accountNumber} / { currentUser?.bankName }</div>
+            <div className='user-account'>{currentUser?.accountNumber} / {currentUser?.bankName}</div>
           </div>
         </div>
 
@@ -89,10 +93,9 @@ export default function UserDetailsComponents() {
             onChange={setActiveTab}
           />
         </div>
-        </div>
-
-      <div className='tab-content'>{ currentContent }</div>
-
       </div>
-  )
+
+      <div className='tab-content'>{currentContent}</div>
+    </div>
+  );
 }

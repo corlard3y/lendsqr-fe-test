@@ -82,6 +82,20 @@
       display: none;
   }
 
+  .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 100%;
+      background-color: orange;
+  }
+
+  @include respond(phone) {
+      .avatar {
+          width: 28px;
+          height: 28px;
+      }
+  }
+
   @include respond(tablet) {
       .bars-icon {
           display: block;

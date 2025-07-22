@@ -28,9 +28,9 @@ export const Topbar: FC<Props> = ({ toggleSidebar }) => {
 
         <BsBell className='bell-icon' />
 
-        <div style={{ width: '45px', height: '45px', backgroundColor: 'red', borderRadius: '100%' }}></div>
 
         <div className='user-name'>
+          <div className='avatar'></div>
           <p>Adedeji</p>
           <BsFillCaretDownFill />
         </div>
