@@ -1,20 +1,32 @@
 @use '../../styles/media' as *;
 @use '../../styles/mixins' as *;
 
-
 .tabs-header {
   display: flex;
-  margin-top: 0px;
-  margin-bottom: -1px;
-  border-radius: 0 0 4px 4px;
+  gap: 16px;
+  border-bottom: 1px solid rgba(33, 63, 125, 0.1);
+  padding-bottom: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   .tab {
-    padding: 10px 24px;
-    cursor: pointer;
-    @include text-style(1rem, 400,  #39CDCC);
-    color: #545f7d;
+    flex-shrink: 0;
+    padding: 10px 20px;
+    background: none;
+    border: none;
     border-bottom: 2px solid transparent;
-    transition: border-color 0.3s;
+    cursor: pointer;
+    @include text-style(1rem, 500, #545F7D);
+    transition: border-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      color: #39cdcc;
+    }
 
     &.active {
       border-bottom: 2px solid #39cdcc;
