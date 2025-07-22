@@ -204,6 +204,10 @@ div {
       grid-template-columns: repeat(5, 1fr);
       gap: 24px;
 
+      @include respond(ipad) {
+          grid-template-columns: repeat(2, 1fr);
+      }
+
       @include respond(tablet) {
         grid-template-columns: 1fr;
       }
