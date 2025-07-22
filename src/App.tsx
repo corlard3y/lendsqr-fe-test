@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import Users from './pages/Users'
@@ -6,6 +7,8 @@ import MainLayout from './structure/MainLayout'
 import UserDetails from './pages/UserDetails'
 
 function App() {
+
+
   return (
     <Router>
       <Routes>
