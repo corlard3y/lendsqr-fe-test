@@ -43,9 +43,16 @@ export const FilterablePaginatedTable = <T extends object>({
 
   const filteredData = useMemo(() => {
     return data.filter((row) =>
-      Object.entries(filters).every(([key, value]) =>
-        String((row as any)[key] ?? '').toLowerCase().includes(value.toLowerCase())
-      )
+      Object.entries(filters).every(([key, value]) => {
+        const field = row[key as keyof T];
+        if (value.trim() === '') return true;
+
+        if (typeof field === 'string' || typeof field === 'number') {
+          return String(field).toLowerCase().includes(value.toLowerCase());
+        }
+
+        return false;
+      })
     );
   }, [data, filters]);
 

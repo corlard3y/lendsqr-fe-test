@@ -132,5 +132,18 @@ h2 {
         background-color: #f4f4f4;
       }
     }
+
+    li a {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        color: #545F7D;
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 500;
+        text-decoration: none;
+    }
   }
 }

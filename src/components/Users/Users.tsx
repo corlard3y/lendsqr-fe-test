@@ -1,59 +1,53 @@
 import { useMemo, useState } from "react";
+
 import { GetUsers } from "../../queries";
 import { FilterablePaginatedTable } from "../../shared/Table";
 import { UsersStats } from "./UsersStats";
 import { StatusTag } from "./StatusTag";
 import { RowActions } from "./RowActions";
-import type { ColumnDef } from "@tanstack/react-table";
 
-type User = {
-  id: number;
-  organization: string;
-  username: string;
-  email: string;
-  phoneNumber: string;
-  dateJoined: string;
-  status: string;
-};
+import type { ColumnDef } from "@tanstack/react-table";
+import type { User } from "../../types/users";
 
 export default function Users() {
   const { data: users, isLoading, isError } = GetUsers();
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
 
-  const userData = useMemo(() => {
-    return users?.map((user: any) => ({
-      id: user.id,
-      organization: user.organization || user.organizationName || 'N/A',
-      username: user.username?.toLowerCase() || 'user',
-      email: user.email,
-      phoneNumber: user.phoneNumber,
-      dateJoined: user.dateJoined || '2023-01-01',
-      status: user.status || 'inactive',
-    }));
+  const userData: User[] = useMemo(() => {
+    return users?.map((user: Partial<User> & { organizationName?: string }) => ({
+      id: user.id ?? 0,
+      organization: user.organization || user.organizationName || "N/A",
+      username: user.username?.toLowerCase() || "user",
+      email: user.email || "noemail@example.com",
+      phoneNumber: user.phoneNumber || "0000000000",
+      dateJoined: user.dateJoined || "2023-01-01",
+      status: user.status || "inactive",
+    })) ?? [];
   }, [users]);
 
   if (isLoading) return <p>Loading users...</p>;
   if (isError || !users) return <p>Error loading users.</p>;
 
   const columns: ColumnDef<User>[] = [
-    { accessorKey: 'organization', header: 'Organization' },
-    { accessorKey: 'username', header: 'Username' },
-    { accessorKey: 'email', header: 'Email' },
-    { accessorKey: 'phoneNumber', header: 'Phone Number' },
-    { accessorKey: 'dateJoined', header: 'Date Joined' },
+    { accessorKey: "organization", header: "Organization" },
+    { accessorKey: "username", header: "Username" },
+    { accessorKey: "email", header: "Email" },
+    { accessorKey: "phoneNumber", header: "Phone Number" },
+    { accessorKey: "dateJoined", header: "Date Joined" },
     {
-      accessorKey: 'status',
-      header: 'Status',
-      cell: ({ getValue }: any) => <StatusTag status={getValue()} />,
+      accessorKey: "status",
+      header: "Status",
+      cell: ({ getValue }) => <StatusTag status={getValue() as string} />,
     },
     {
-      id: 'actions',
-      header: '',
+      id: "actions",
+      header: "",
       cell: ({ row }) => (
         <RowActions
+          id={row.original.id}
           open={openDropdown === row.original.id}
           onToggle={() =>
-            setOpenDropdown(prev =>
+            setOpenDropdown((prev) =>
               prev === row.original.id ? null : row.original.id
             )
           }
@@ -69,11 +63,22 @@ export default function Users() {
       <h2>Users</h2>
 
       <div className="stats-section">
-        <UsersStats />
+        <UsersStats users={users} />
       </div>
 
       <div className="table-section">
-        <FilterablePaginatedTable data={userData} columns={columns} filterableKeys={['organization', 'username', 'email', 'phoneNumber', 'dateJoined', 'status']} />
+        <FilterablePaginatedTable
+          data={userData}
+          columns={columns}
+          filterableKeys={[
+            "organization",
+            "username",
+            "email",
+            "phoneNumber",
+            "dateJoined",
+            "status",
+          ]}
+        />
       </div>
     </div>
   );
