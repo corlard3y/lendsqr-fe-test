@@ -8,7 +8,7 @@ import {
 import { useMemo, useState, useRef, useEffect } from 'react';
 import './Table.scss';
 import { FilterForm } from './FilterForm';
-import { FilterIcon } from '../../assets/icons';
+import { FilterIcon, TableArrowLeftIcon, TableArrowRightIcon } from '../../assets/icons';
 
 interface TableProps<T extends object> {
   data: T[];
@@ -33,11 +33,11 @@ export const FilterablePaginatedTable = <T extends object>({
     };
 
     if (showFilterForm) {
-      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener('mousedown', handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [showFilterForm]);
 
@@ -68,6 +68,12 @@ export const FilterablePaginatedTable = <T extends object>({
       },
     },
   });
+
+  const pageCount = table.getPageCount();
+  const currentPage = table.getState().pagination.pageIndex;
+
+  let hasLeftDots = false;
+  let hasRightDots = false;
 
   return (
     <div>
@@ -120,15 +126,71 @@ export const FilterablePaginatedTable = <T extends object>({
       </div>
 
       <div className="pagination">
-        <button onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
-          Previous
-        </button>
-        <span>
-          Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
-        </span>
-        <button onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
-          Next
-        </button>
+        <div className="pagination-info">
+          <label htmlFor="page-select">Showing</label>
+          <div className="select-wrapper">
+            <select
+              id="page-select"
+              value={currentPage}
+              onChange={(e) => table.setPageIndex(Number(e.target.value))}
+            >
+              {Array.from({ length: pageCount }, (_, i) => (
+                <option key={i} value={i}>
+                  {i + 1}
+                </option>
+              ))}
+            </select>
+          </div>
+          <span>out of {pageCount}</span>
+        </div>
+
+        <div className="pagination-controls">
+          <button
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+          >
+            <img src={TableArrowLeftIcon} />
+          </button>
+
+          {Array.from({ length: pageCount }, (_, i) => {
+            const isActive = currentPage === i;
+
+            if (
+              i === 0 ||
+              i === pageCount - 1 ||
+              Math.abs(i - currentPage) <= 1
+            ) {
+              return (
+                <button
+                  key={i}
+                  onClick={() => table.setPageIndex(i)}
+                  className={isActive ? 'active' : ''}
+                >
+                  {i + 1}
+                </button>
+              );
+            }
+
+            if (i < currentPage && !hasLeftDots) {
+              hasLeftDots = true;
+              return <span key={`left-dots-${i}`}>...</span>;
+            }
+
+            if (i > currentPage && !hasRightDots) {
+              hasRightDots = true;
+              return <span key={`right-dots-${i}`}>...</span>;
+            }
+
+            return null;
+          })}
+
+          <button
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
+            <img src={TableArrowRightIcon} />
+          </button>
+        </div>
       </div>
     </div>
   );
