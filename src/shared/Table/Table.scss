@@ -219,3 +219,27 @@
   letter-spacing: 0px;
   width: 100%;
 }
+
+.no-content {
+  text-align: center;
+  padding: 40px 20px;
+  color: #545f7d;
+  font-size: 16px;
+  font-weight: 500;
+  
+  .icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+  }
+  
+  .message {
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  
+  .sub-message {
+    font-size: 14px;
+    opacity: 0.7;
+  }
+}

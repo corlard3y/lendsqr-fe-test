@@ -113,15 +113,31 @@ export const FilterablePaginatedTable = <T extends object>({
             ))}
           </thead>
           <tbody>
-            {table.getRowModel().rows.map((row) => (
-              <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
+            {table.getRowModel().rows.length === 0 ? (
+              <tr>
+                <td colSpan={columns.length}>
+                  <div className="no-content">
+                    <div className="icon">📄</div>
+                    <div className="message">No users found</div>
+                    <div className="sub-message">
+                      {Object.values(filters).some(value => value.trim() !== '') 
+                        ? 'Try adjusting your filters' 
+                        : 'No data available'}
+                    </div>
+                  </div>
+                </td>
               </tr>
-            ))}
+            ) : (
+              table.getRowModel().rows.map((row) => (
+                <tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => (
+                    <td key={cell.id}>
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </td>
+                  ))}
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
