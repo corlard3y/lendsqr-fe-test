@@ -1,34 +1,45 @@
 import './UserDetails.scss';
+import type { UserDetails } from '../../types/users';
 
-const sections = [
-  {
-    title: 'Personal Information',
-    items: [
-      { label: 'Full Name', value: 'Grace Effiom' },
-      { label: 'Phone Number', value: '07060780922' },
-      { label: 'Email Address', value: 'grace@gmail.com' },
-      { label: 'BVN', value: '07060780922' },
-      { label: 'Gender', value: 'Female' },
-      { label: 'Marital Status', value: 'Single' },
-      { label: 'Children', value: 'None' },
-      { label: 'Type of Residence', value: "Parent's Apartment" },
-    ]
-  },
-  {
-    title: 'Education and Employment',
-    items: [
-      { label: 'Level of Education', value: 'B.Sc' },
-      { label: 'Employment Status', value: 'Employed' },
-      { label: 'Sector of Employment', value: 'FinTech' },
-      { label: 'Duration of Employment', value: '2 years' },
-      { label: 'Office Email', value: 'grace@lendsqr.com' },
-      { label: 'Monthly Income', value: '₦200,000.00 - ₦400,000.00' },
-      { label: 'Loan Repayment', value: '40,000' }
-    ]
-  }
-];
+type Props = {
+  currentUser: UserDetails;
+};
 
-export default function GeneralDetails() {
+export default function GeneralDetails({ currentUser }: Props) {
+  const sections = [
+    {
+      title: 'Personal Information',
+      items: [
+        { label: 'Full Name', value: currentUser.fullName },
+        { label: 'Phone Number', value: `+234${String(currentUser.phoneNumber)}` },
+        { label: 'Email Address', value: currentUser.email },
+        { label: 'BVN', value: currentUser.bvn },
+        { label: 'Gender', value: currentUser.gender },
+        { label: 'Marital Status', value: currentUser.maritalStatus },
+        { label: 'Children', value: currentUser.children },
+        { label: 'Type of Residence', value: currentUser.residence },
+      ],
+    },
+    {
+      title: 'Education and Employment',
+      items: [
+        { label: 'Level of Education', value: currentUser.levelOfEducation },
+        { label: 'Employment Status', value: currentUser.employmentStatus },
+        { label: 'Sector of Employment', value: currentUser.sectorOfEmployment },
+        { label: 'Duration of Employment', value: currentUser.durationOfEmployment },
+        { label: 'Office Email', value: currentUser.email },
+        { label: 'Monthly Income', value: currentUser.monthlyIncome },
+        {
+          label: 'Loan Repayment',
+          value:
+            typeof currentUser.loanRepayment === 'number'
+              ? `₦${currentUser.loanRepayment.toLocaleString()}`
+              : 'N/A',
+        },
+      ],
+    },
+  ];
+
   return (
     <div className="general-details">
       {sections.map((section, i) => (

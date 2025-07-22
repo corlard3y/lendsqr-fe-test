@@ -19,7 +19,7 @@ export default function Users() {
       organization: user.organization || user.organizationName || "N/A",
       username: user.username?.toLowerCase() || "user",
       email: user.email || "noemail@example.com",
-      phoneNumber: user.phoneNumber || "0000000000",
+      phoneNumber: `+234${String(user.phoneNumber)}`,
       dateJoined: user.dateJoined || "2023-01-01",
       status: user.status || "inactive",
     })) ?? [];

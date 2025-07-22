@@ -16,22 +16,22 @@ export const UsersStats = ({ users }: {users: UserDetails[]}) => {
   const usersStatsConfig = [
     {
       title: 'Users',
-      stats: totalUsers || '-',
+      stats: (totalUsers || 0).toLocaleString(),
       img: TotalUsersImg,
     },
     {
       title: 'Active Users',
-      stats: activeUsers || '_',
+      stats: (activeUsers || 0).toLocaleString(),
       img: ActiveUsersImg,
     },
     {
       title: 'Users with Loan',
-      stats: usersWithLoan || '_',
+      stats: (usersWithLoan || 0).toLocaleString(),
       img: UsersWithLoan,
     },
     {
       title: 'Users with Savings',
-      stats: usersWithSavings || '_',
+      stats: (usersWithSavings || 0).toLocaleString(),
       img: UsersWithSavings,
     },
   ];
