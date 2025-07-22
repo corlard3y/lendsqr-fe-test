@@ -35,6 +35,7 @@ export default function LoginComponent() {
         <img src={LendsqrLoginImage} className='login-image' alt='Lendsqr Login' />
       </div>
 
+      <div className='login-section'>
       <div className="form-wrapper">
         <div>
           <h2>Welcome!</h2>
@@ -71,6 +72,7 @@ export default function LoginComponent() {
             <button type="submit">Log in</button>
           </Form>
         </Formik>
+      </div>
       </div>
     </div>
   )

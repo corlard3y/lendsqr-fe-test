@@ -19,6 +19,7 @@
     color: rgba(33, 63, 125);
     text-decoration: none;
     margin: 6px 0;
+    cursor: pointer;
 
     &:not(:first-of-type) {
         border-top: 1px solid rgba(33, 63, 125, 0.1);
